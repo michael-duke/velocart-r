@@ -1,10 +1,9 @@
-import Header from "../components/ui/Header";
+import Layout from "@/components/ui/Layout";
 import "./HomePage.css";
 
 export default function HomePage() {
   return (
-    <>
-      <Header />
+    <Layout>
       <div className="home-page">
         <div className="products-grid">
           <div className="product-container">
@@ -140,6 +139,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }

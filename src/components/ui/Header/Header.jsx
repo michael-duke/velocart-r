@@ -1,6 +1,6 @@
 import { Search, ShoppingCart } from "lucide-react";
-import logoWhite from "../assets/logos/logo-white.png";
-import mobileLogoWhite from "../assets/logos/mobile-logo-white.png";
+import logoWhite from "@/assets/logos/logo-white.png";
+import mobileLogoWhite from "@/assets/logos/mobile-logo-white.png";
 import HeaderLink from "./HeaderLink";
 
 export default function Header() {
