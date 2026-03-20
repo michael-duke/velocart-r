@@ -1,4 +1,4 @@
-import Header from "../ui/Header";
+import Header from "../components/ui/Header";
 import "./HomePage.css";
 
 export default function HomePage() {
