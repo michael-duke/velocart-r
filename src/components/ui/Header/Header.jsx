@@ -7,7 +7,8 @@ export default function Header() {
   return (
     <header
       className="z-50 fixed top-0 left-0 right-0 bg-velocart-navy
-     text-white px-3.75 h-15 flex items-center justify-between"
+     text-white px-3.75 h-15 flex items-center justify-between
+      pr-[var(--removed-body-scroll-bar-size, 0px)]"
     >
       {/* Left Section */}
       <section className="w-auto md:w-52">
@@ -56,15 +57,18 @@ export default function Header() {
 
         <HeaderLink
           href="checkout.html"
-          className="relative flex items-center px-3.25 ml-1.25"
+          className="flex items-center px-3.25 ml-1.25"
         >
-          <ShoppingCart className="" fill="white" size={38} />
-          <span
-            className="text-velocart-navy text-[15px] text-center font-bold 
-          absolute right-12.75 w-6.25"
-          >
-            3
-          </span>
+          <div className="relative flex items-center justify-center">
+            <ShoppingCart fill="white" size={38} />
+            <span
+              className="absolute top-2.75 left-1/2 -translate-x-2/5 
+               text-velocart-navy text-sm text-center font-bold 
+               leading-none min-w-5 pointer-events-none"
+            >
+              3
+            </span>
+          </div>
           <div className="ml-1.25 text-[15px] font-bold">Cart</div>
         </HeaderLink>
       </section>
