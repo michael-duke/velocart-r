@@ -11,14 +11,14 @@ import formatCurrency from "@/utils/money";
 
 export default function ProductCard({ product }) {
   return (
-    <div className="flex flex-col pt-10 pb-6.25 px-6.25 border border-[#f0f0f0]">
+    <div className="flex flex-col pt-10 pb-6.25 px-6.25 border-r border-b border-velocart-navy/7">
       <div className="flex items-center justify-center h-45 mb-5">
         <img
           className="max-w-full max-h-full rounded-[5px]"
           src={product.image}
         />
       </div>
-      <div className="h-10 mb-1.25 limit-text-to-2-lines">{product.name}</div>
+      <div className="h-10 leading-5 mb-1.25 line-clamp-2">{product.name}</div>
       <StarRating rating={product.rating.stars} count={product.rating.count} />
       <div className="font-bold mb-2.5">
         {formatCurrency(product.priceCents)}

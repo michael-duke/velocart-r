@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 export default function ProductGrid() {
   return (
     <div
-      className="grid grid-cols-1 gap-x-3 gap-y-10 p-5
+      className="grid grid-cols-1
       min-[450px]:grid-cols-2
       min-[575px]:grid-cols-3      
       min-[800px]:grid-cols-4
