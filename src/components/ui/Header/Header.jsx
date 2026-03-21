@@ -11,7 +11,7 @@ export default function Header() {
     >
       {/* Left Section */}
       <section className="w-auto md:w-52">
-        <HeaderLink href=".">
+        <HeaderLink href="." className="px-3.25">
           <img
             className="h-6.5 mt-px hidden min-[675px]:block"
             src={logoWhite}
