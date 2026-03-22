@@ -1,6 +1,7 @@
+import { Link } from "react-router";
+import { CreditCard } from "lucide-react";
 import logo from "@/assets/logos/logo.png";
 import mobileLogo from "@/assets/logos/mobile-logo.png";
-import { CreditCard } from "lucide-react";
 
 export default function CheckoutHeader() {
   return (
@@ -8,7 +9,7 @@ export default function CheckoutHeader() {
       <div className="w-full max-w-275 flex items-center justify-between">
         {/* Logo Section */}
         <section className="w-auto min-[575px]:w-50">
-          <a href="/" className="inline-block">
+          <Link to="/" className="inline-block">
             <img
               src={logo}
               className="h-6.5 hidden min-[575px]:block"
@@ -19,7 +20,7 @@ export default function CheckoutHeader() {
               className="h-6.5 min-[575px]:hidden"
               alt="Mobile Logo"
             />
-          </a>
+          </Link>
         </section>
 
         {/* Title Section ('Hero' of the Header) */}
