@@ -12,7 +12,7 @@ export default function Header() {
     >
       {/* Left Section */}
       <section className="w-auto md:w-52">
-        <HeaderLink href="." className="px-3.25">
+        <HeaderLink href="/" className="px-3.25">
           <img
             className="h-6.5 mt-px hidden min-[675px]:block"
             src={logoWhite}
@@ -51,12 +51,12 @@ export default function Header() {
 
       {/* Right Section */}
       <section className="w-45 shrink-0 flex justify-end items-center">
-        <HeaderLink href="orders.html" className="px-3.25">
+        <HeaderLink href="/orders" className="px-3.25">
           <span className="text-[15px] font-bold">Orders</span>
         </HeaderLink>
 
         <HeaderLink
-          href="checkout.html"
+          href="/checkout"
           className="flex items-center px-3.25 ml-1.25"
         >
           <div className="relative flex items-center justify-center">
