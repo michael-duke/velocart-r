@@ -1,5 +1,10 @@
-import ProductGrid from "@/components/product/ProductGrid";
+import ProductGrid from '@/components/product/ProductGrid';
 
 export default function HomePage() {
-  return <ProductGrid />;
+  return (
+    <>
+      <title>Velocomm</title>
+      <ProductGrid />;
+    </>
+  );
 }
