@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router";
+import { useSearchParams, Link } from "react-router";
 import { calculateDeliveryProgress } from "@/utils/progress";
 import products from "@/data/product.json";
 import TrackingProductInfo from "@/components/tracking/TrackingProductInfo";
@@ -17,9 +17,9 @@ export default function TrackingPage() {
     return (
       <div className="mx-auto mt-22.5 mb-25 max-w-212.5 px-7.5 text-center">
         <p className="mb-4 text-red-600">Order not found.</p>
-        <a className="link-primary" href="/orders">
+        <Link className="link-primary" to="/orders">
           Back to orders
-        </a>
+        </Link>
       </div>
     );
   }
@@ -29,9 +29,9 @@ export default function TrackingPage() {
     return (
       <div className="mx-auto mt-22.5 mb-25 max-w-212.5 px-7.5 text-center">
         <p className="mb-4 text-red-600">Product not found.</p>
-        <a className="link-primary" href="/orders">
+        <Link className="link-primary" to="/orders">
           Back to orders
-        </a>
+        </Link>
       </div>
     );
   }
@@ -43,9 +43,9 @@ export default function TrackingPage() {
     return (
       <div className="mx-auto mt-22.5 mb-25 max-w-212.5 px-7.5 text-center">
         <p className="mb-4 text-red-600">Product not found in this order.</p>
-        <a className="link-primary" href="/orders">
+        <Link className="link-primary" to="/orders">
           Back to orders
-        </a>
+        </Link>
       </div>
     );
   }
@@ -58,9 +58,9 @@ export default function TrackingPage() {
   return (
     <div className="mx-auto mt-22.5 mb-25 max-w-212.5 px-7.5">
       <div>
-        <a className="link-primary mb-7.5 inline-block" href="/orders">
+        <Link className="link-primary mb-7.5 inline-block" to="/orders">
           View all orders
-        </a>
+        </Link>
 
         <TrackingProductInfo
           productDetails={productDetails}
@@ -72,4 +72,3 @@ export default function TrackingPage() {
     </div>
   );
 }
-

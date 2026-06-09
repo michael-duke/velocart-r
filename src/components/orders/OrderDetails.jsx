@@ -2,17 +2,13 @@ import { formatOrderDate } from "@/utils/date";
 import products from "@/data/product.json";
 import { Check, RefreshCcw } from "lucide-react";
 import { cx } from "class-variance-authority";
+import { Link } from "react-router";
 export default function OrderDetails({ detail, orderId }) {
   // Find the matching product using the product.json data
   const product = products.find((p) => p.id === detail.productId);
 
-  // Fallback if the product isn't found
   if (!product) return null;
-  // display: grid;
-  // grid-template-columns: 110px 1fr 220px;
-  // column-gap: 35px;
-  // row-gap: 60px;
-  // align-items: center;
+
   return (
     <div
       className={cx(
@@ -49,11 +45,11 @@ export default function OrderDetails({ detail, orderId }) {
       </div>
 
       <div className="product-actions self-start">
-        <a href={`/tracking?orderId=${orderId}&productId=${detail.productId}`}>
+        <Link to={`/tracking?orderId=${orderId}&productId=${detail.productId}`}>
           <button className="track-package-button button-secondary w-full p-2 text-[15px]">
             Track package
           </button>
-        </a>
+        </Link>
       </div>
     </div>
   );
