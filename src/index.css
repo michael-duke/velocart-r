@@ -12,6 +12,7 @@
   --color-velocart-amber: #ffbf00;
   --color-velocart-amber-hover: #e5ab00;
   --color-velocart-notify-green: #198754;
+  --color-progress-status: #067d62;
 
   --animate-smooth-pulse: smooth-pulse 1.4s infinite ease-in-out both;
 
@@ -33,7 +34,7 @@
 
 @layer base {
   body {
-    @apply font-roboto m-0 bg-gray-100 text-foreground;
+    @apply font-roboto text-foreground m-0 bg-gray-100;
     scrollbar-gutter: stable;
   }
 
@@ -44,12 +45,12 @@
   button,
   select,
   input {
-    @apply font-roboto outline-none transition-all;
+    @apply font-roboto transition-all outline-none;
   }
 
   input:focus,
   select:focus {
-    @apply ring-2 ring-velocart-amber ring-offset-0;
+    @apply ring-velocart-amber ring-2 ring-offset-0;
     box-shadow: 0 0 0 3px rgba(255, 191, 0, 0.2);
     border-color: transparent;
   }
@@ -64,21 +65,21 @@
 /* Component Classes */
 @layer components {
   .button-primary {
-    @apply bg-velocart-navy text-white px-4 py-2 rounded-[5px] border border-transparent 
-           flex items-center justify-center
-           shadow-[0_2px_5px_rgba(220,220,220,0.5)] cursor-pointer 
-           hover:bg-velocart-navy/75 active:shadow-none;
+    @apply bg-velocart-navy hover:bg-velocart-navy/75 flex cursor-pointer items-center justify-center rounded-[5px] border border-transparent px-4 py-2 text-white shadow-[0_2px_5px_rgba(220,220,220,0.5)] active:shadow-none;
   }
 
   .button-secondary {
-    @apply bg-white text-[#212121] px-4 py-2 rounded-[5px] border border-[#c8c8c8]
-           flex items-center justify-center 
-           shadow-[0_2px_5px_rgba(220,220,220,0.2)] cursor-pointer 
-           hover:bg-[#fafafa] active:bg-[#f0f0f0] active:shadow-none;
+    @apply flex cursor-pointer items-center justify-center rounded-[5px] border border-[#c8c8c8] bg-white px-4 py-2 text-[#212121] shadow-[0_2px_5px_rgba(220,220,220,0.2)] hover:bg-[#fafafa] active:bg-[#f0f0f0] active:shadow-none;
   }
 
   .link-primary {
     @apply text-velocart-navy cursor-pointer hover:opacity-75 active:opacity-50;
+  }
+  .progress-label {
+    @apply max-[450px]:mb-0.75;
+  }
+  .current-status {
+    @apply text-progress-status;
   }
 }
 
