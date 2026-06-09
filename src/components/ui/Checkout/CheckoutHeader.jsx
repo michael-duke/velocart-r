@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { CreditCard } from "lucide-react";
-import logo from "@/assets/logos/logo.png";
-import mobileLogo from "@/assets/logos/mobile-logo.png";
+import logo from "@/assets/logos/velocart-logo.png";
+import mobileLogo from "@/assets/logos/velocart-mobile-logo.png";
 
 export default function CheckoutHeader() {
   return (
@@ -15,12 +15,12 @@ export default function CheckoutHeader() {
           <Link to="/" className="inline-block">
             <img
               src={logo}
-              className="h-6.5 hidden min-[575px]:block"
+              className="h-8 hidden min-[575px]:block"
               alt="Logo"
             />
             <img
               src={mobileLogo}
-              className="h-6.5 min-[575px]:hidden"
+              className="h-8 min-[575px]:hidden"
               alt="Mobile Logo"
             />
           </Link>

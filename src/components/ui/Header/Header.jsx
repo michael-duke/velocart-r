@@ -1,6 +1,6 @@
 import { Search, ShoppingCart } from "lucide-react";
-import logoWhite from "@/assets/logos/logo-white.png";
-import mobileLogoWhite from "@/assets/logos/mobile-logo-white.png";
+import logoWhite from "@/assets/logos/velocart-logo-white.png";
+import mobileLogoWhite from "@/assets/logos/velocart-mobile-logo-white.png";
 import HeaderLink from "./HeaderLink";
 
 export default function Header() {
@@ -14,12 +14,12 @@ export default function Header() {
       <section className="w-auto md:w-52">
         <HeaderLink href="/" className="px-3.25">
           <img
-            className="h-6.5 mt-px hidden min-[675px]:block"
+            className="h-8 mt-px hidden min-[675px]:block"
             src={logoWhite}
             alt="Logo"
           />
           <img
-            className="h-6.5 mt-px block min-[675px]:hidden"
+            className="h-8 mt-px block min-[675px]:hidden"
             src={mobileLogoWhite}
             alt="Mobile Logo"
           />
