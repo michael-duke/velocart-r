@@ -11,18 +11,27 @@ export function formatDeliveryDate(dateOrDays) {
   return dayjs(dateOrDays).format("dddd, MMMM D");
 }
 
-function formatBusinessDate(deliveryDays) {
+// Helper: Calculates future business date (skicking weekends) from today
+export function calculateBusinessDate(deliveryDays) {
   let date = dayjs();
   let daysCounted = 0;
 
   while (daysCounted < deliveryDays) {
     date = date.add(1, "day");
-
-    // Use the helper in the loop
     if (!isWeekend(date)) daysCounted++;
   }
 
+  return date;
+}
+
+function formatBusinessDate(deliveryDays) {
+  const date = calculateBusinessDate(deliveryDays);
   return date.format("dddd, MMMM D");
+}
+
+export function calculateDeliveryDateISO(deliveryDays) {
+  const date = calculateBusinessDate(deliveryDays);
+  return date.toISOString();
 }
 
 // Helper: Returns true if the date is Sat (6) or Sun (0)

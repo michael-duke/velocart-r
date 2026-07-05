@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router";
 import { formatCurrency, calculateTax } from "@/utils/money";
 import { getDeliveryOption } from "@/utils/deliveryOption";
+import { useCart } from "@/context/CartContext";
+import { calculateDeliveryDateISO } from "@/utils/date";
 
 export default function PaymentSummary({ cartItems }) {
+  const { clearCart } = useCart();
+  const navigate = useNavigate();
+
   const totalItemsCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const itemsCostCents = cartItems.reduce((sum, item) => sum + (item.priceCents * item.quantity), 0);
   const shippingCostCents = cartItems.reduce((sum, item) => sum + getDeliveryOption(item.deliveryOptionId).priceCents, 0);
@@ -9,6 +15,37 @@ export default function PaymentSummary({ cartItems }) {
   const totalBeforeTaxCents = itemsCostCents + shippingCostCents;
   const taxCents = Math.round(calculateTax(totalBeforeTaxCents));
   const orderTotalCents = totalBeforeTaxCents + taxCents;
+
+  const handlePlaceOrder = () => {
+    if (cartItems.length === 0) return;
+
+    const products = cartItems.map((item) => ({
+      productId: item.id,
+      quantity: item.quantity,
+      estimatedDeliveryTime: calculateDeliveryDateISO(
+        getDeliveryOption(item.deliveryOptionId).deliveryDays
+      ),
+      variation: null,
+    }));
+
+    const orderId = crypto.randomUUID();
+
+    const newOrder = {
+      id: orderId,
+      orderTime: new Date().toISOString(),
+      totalCostCents: orderTotalCents,
+      products,
+    };
+
+    // Prepend the new order to the orders list (using unshift)
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    orders.unshift(newOrder);
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    // Clear cart and redirect
+    clearCart();
+    navigate("/orders");
+  };
 
   return (
     <>
@@ -47,8 +84,10 @@ export default function PaymentSummary({ cartItems }) {
       </div>
 
       <button
+        onClick={handlePlaceOrder}
+        disabled={cartItems.length === 0}
         className="w-full bg-velocart-navy opacity-80 hover:opacity-100 text-white my-5
-        py-3 rounded-[5px] font-medium transition-colors cursor-pointer"
+        py-3 rounded-[5px] font-medium transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Place your order
       </button>
