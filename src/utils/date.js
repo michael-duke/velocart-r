@@ -4,8 +4,11 @@ export function formatOrderDate(date) {
   return dayjs(date).format("MMMM D");
 }
 
-export function formatDeliveryDate(date) {
-  return dayjs(date).format("dddd, MMMM D");
+export function formatDeliveryDate(dateOrDays) {
+  if (typeof dateOrDays === "number") {
+    return formatBusinessDate(dateOrDays);
+  }
+  return dayjs(dateOrDays).format("dddd, MMMM D");
 }
 
 function formatBusinessDate(deliveryDays) {

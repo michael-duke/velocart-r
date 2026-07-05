@@ -2,8 +2,12 @@ import { Search, ShoppingCart } from "lucide-react";
 import logoWhite from "@/assets/logos/velocart-logo-white.png";
 import mobileLogoWhite from "@/assets/logos/velocart-mobile-logo-white.png";
 import HeaderLink from "./HeaderLink";
+import { useCart } from "@/context/CartContext";
 
 export default function Header() {
+  const { cart } = useCart();
+  const cartQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <header
       className="z-50 fixed top-0 left-0 right-0 bg-velocart-navy
@@ -66,7 +70,7 @@ export default function Header() {
                text-velocart-navy text-sm text-center font-bold 
                leading-none min-w-5 pointer-events-none"
             >
-              3
+              {cartQuantity}
             </span>
           </div>
           <div className="ml-1.25 text-[15px] font-bold">Cart</div>
