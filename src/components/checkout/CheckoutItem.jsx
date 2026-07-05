@@ -2,8 +2,10 @@ import { formatDeliveryDate } from "@/utils/date";
 import formatCurrency from "@/utils/money";
 import { getDeliveryOption } from "@/utils/deliveryOption";
 import deliveryOptions from "@/data/deliveryOptions.json";
+import { useCart } from "@/context/CartContext";
 
 export default function CheckoutItem({ item }) {
+  const { removeFromCart, updateDeliveryOption } = useCart();
   const deliveryDate = formatDeliveryDate(
     getDeliveryOption(item.deliveryOptionId).deliveryDays,
   );
@@ -41,7 +43,10 @@ export default function CheckoutItem({ item }) {
               <button className="text-velocart-navy cursor-pointer opacity-100 hover:opacity-75">
                 Update
               </button>
-              <button className="text-velocart-navy cursor-pointer opacity-100 hover:opacity-75">
+              <button
+                onClick={() => removeFromCart(item.id)}
+                className="text-velocart-navy cursor-pointer opacity-100 hover:opacity-75"
+              >
                 Delete
               </button>
             </div>
@@ -64,6 +69,7 @@ export default function CheckoutItem({ item }) {
                 date={deliveryDays}
                 priceCents={priceCents}
                 checked={isChecked}
+                onChange={() => updateDeliveryOption(item.id, optionId)}
               />
             );
           })}
@@ -73,7 +79,7 @@ export default function CheckoutItem({ item }) {
   );
 }
 
-function DeliveryOption({ uniqueId, name, date, priceCents, checked }) {
+function DeliveryOption({ uniqueId, name, date, priceCents, checked, onChange }) {
   return (
     <label className="group flex cursor-pointer items-start gap-3">
       <input
@@ -81,7 +87,8 @@ function DeliveryOption({ uniqueId, name, date, priceCents, checked }) {
         id={uniqueId}
         name={name}
         className="accent-velocart-navy mt-1.5 h-4 w-4"
-        defaultChecked={checked}
+        checked={checked}
+        onChange={onChange}
       />
       <div className="text-sm">
         <div className="text-velocart-navy font-bold">

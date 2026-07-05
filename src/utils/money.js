@@ -7,13 +7,13 @@ export function formatCurrency(priceCents) {
 }
 
 /**
- * Calculates Ontario HST (13%) and returns formatted cents
+ * Calculates Ontario HST (13%) and returns tax in cents
  * @param {number} priceCents
  */
 export function calculateTax(priceCents) {
   const taxRate = 0.13; // 13% HST for Ontario
   const taxCents = priceCents * taxRate;
-  return formatCurrency(taxCents);
+  return taxCents;
 }
 
 export default formatCurrency;

@@ -2,8 +2,10 @@ import { Link } from "react-router";
 import { CreditCard } from "lucide-react";
 import logo from "@/assets/logos/velocart-logo.png";
 import mobileLogo from "@/assets/logos/velocart-mobile-logo.png";
+import { useCart } from "@/context/CartContext";
 
 export default function CheckoutHeader() {
+  const { cartQuantity } = useCart();
   return (
     <header className="fixed top-0 right-0 left-0 z-50 flex h-15 justify-center border-b border-gray-200 bg-white px-7.5">
       <div className="flex w-full max-w-275 items-center">
@@ -26,7 +28,7 @@ export default function CheckoutHeader() {
         <section className="flex flex-1 justify-center text-center text-[20px] font-medium min-[1000px]:text-[22px]">
           Checkout (
           <Link className="text-velocart-navy hover:underline" to="/">
-            3 items
+            {cartQuantity} items
           </Link>
           )
         </section>

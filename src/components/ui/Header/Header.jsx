@@ -5,8 +5,7 @@ import HeaderLink from "./HeaderLink";
 import { useCart } from "@/context/CartContext";
 
 export default function Header() {
-  const { cart } = useCart();
-  const cartQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const { cartQuantity } = useCart();
 
   return (
     <header
