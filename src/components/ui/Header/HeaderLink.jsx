@@ -1,18 +1,21 @@
 import { cn } from "@/lib/utils";
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 
 export default function HeaderLink({ href, children, className, ...props }) {
   return (
-    <Link
+    <NavLink
       to={href}
-      className={cn(
-        "inline-block text-white p-[6px_9.5px] no-underline cursor-pointer rounded-xs",
-        "border border-transparent hover:border-white transition-colors",
-        className,
-      )}
+      className={({ isActive }) =>
+        cn(
+          "inline-block cursor-pointer rounded-xs p-[6px_9.5px] text-white no-underline",
+          "border border-transparent transition-colors hover:border-white",
+          isActive ? "underline" : "",
+          className,
+        )
+      }
       {...props}
     >
       {children}
-    </Link>
+    </NavLink>
   );
 }
