@@ -1,9 +1,13 @@
-import { formatOrderDate } from "@/utils/date";
+import { formatDeliveryDate } from "@/utils/date";
 import products from "@/data/product.json";
-import { Check, RefreshCcw } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
 import { cx } from "class-variance-authority";
 import { Link } from "react-router";
+import { useCart } from "@/context/CartContext";
+import AddToCartButton from "../ui/AddToCartButton";
+
 export default function OrderDetails({ detail, orderId }) {
+  const { addToCart } = useCart();
   // Find the matching product using the product.json data
   const product = products.find((p) => p.id === detail.productId);
 
@@ -23,25 +27,16 @@ export default function OrderDetails({ detail, orderId }) {
       <div className="product-details">
         <div className="product-name font-medium">{product.name}</div>
         <div className="product-delivery-date">
-          Arriving on: {formatOrderDate(detail.estimatedDeliveryTime)}
+          Arriving on: {formatDeliveryDate(detail.estimatedDeliveryTime)}
         </div>
         <div className="product-quantity">Quantity: {detail.quantity}</div>
 
-        <div
-          className={`added-to-cart hidden added-to-cart-${orderId}-${detail.productId}`}
-        >
-          <Check />
-          Added
-        </div>
-
-        <button
+        <AddToCartButton
+          onAdd={() => addToCart(product, 1)}
+          text="Buy it again"
+          icon={<RefreshCcw size={20} className="mr-2.5" />}
           className="buy-again-button button-primary h-9 w-37.5 text-[15px]"
-          data-product-id={detail.productId}
-          data-order-id={orderId}
-        >
-          <RefreshCcw size={20} className="mr-2.5" />
-          <span className="buy-again-message">Buy it again</span>
-        </button>
+        />
       </div>
 
       <div className="product-actions self-start">

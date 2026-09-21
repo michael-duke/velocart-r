@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -6,29 +6,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CircleCheck } from "lucide-react";
 import StarRating from "@/components/ui/StarRating";
 import formatCurrency from "@/utils/money";
 import { useCart } from "@/context/CartContext";
+import AddToCartButton from "../ui/AddToCartButton";
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
-  const [showAdded, setShowAdded] = useState(false);
-  const timeoutRef = useRef(null);
-
-  const handleAddToCart = () => {
-    addToCart(product, quantity);
-    setShowAdded(true);
-
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    timeoutRef.current = setTimeout(() => {
-      setShowAdded(false);
-    }, 2000);
-  };
 
   return (
     <div className="border-velocart-navy/7 flex flex-col border-r border-b px-6.25 pt-10 pb-6.25">
@@ -62,22 +47,7 @@ export default function ProductCard({ product }) {
           </SelectContent>
         </Select>
       </div>
-      <div className="flex-1"></div>
-      <div
-        className={`text-velocart-notify-green mb-2 flex items-center gap-1.5 transition-opacity duration-300 ${showAdded ? "opacity-100" : "opacity-0"}`}
-      >
-        <CircleCheck
-          size={19}
-          className="fill-velocart-notify-green text-white"
-        />
-        <span>Added</span>
-      </div>
-      <button
-        onClick={handleAddToCart}
-        className="button-primary h-8.5 w-full p-2"
-      >
-        Add to Cart
-      </button>
+      <AddToCartButton onAdd={() => addToCart(product, quantity)} />
     </div>
   );
 }

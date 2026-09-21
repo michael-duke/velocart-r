@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import CheckoutHeader from "@/components/ui/Checkout/CheckoutHeader";
 
-export default function MainLayout() {
+export default function CheckoutLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       <CheckoutHeader />

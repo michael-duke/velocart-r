@@ -31,7 +31,7 @@ export default function CheckoutItem({ item }) {
             {item.name}
           </div>
           <div className="text-velocart-navy text-base font-bold">
-            ${(item.priceCents / 100).toFixed(2)}
+            {formatCurrency(item.priceCents)}
           </div>
 
           <div className="mt-3 flex items-center gap-3 text-sm max-[390px]:flex-col max-[390px]:items-start">
@@ -60,7 +60,7 @@ export default function CheckoutItem({ item }) {
           </span>
 
           {deliveryOptions.map(({ id: optionId, deliveryDays, priceCents }) => {
-            const isChecked = item.deliveryOptionId == optionId;
+            const isChecked = item.deliveryOptionId === optionId;
             return (
               <DeliveryOption
                 key={optionId}
@@ -79,7 +79,14 @@ export default function CheckoutItem({ item }) {
   );
 }
 
-function DeliveryOption({ uniqueId, name, date, priceCents, checked, onChange }) {
+function DeliveryOption({
+  uniqueId,
+  name,
+  date,
+  priceCents,
+  checked,
+  onChange,
+}) {
   return (
     <label className="group flex cursor-pointer items-start gap-3">
       <input

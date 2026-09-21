@@ -27,7 +27,7 @@ export default function OrderHeader({ orderId, orderTotalCost, orderTime }) {
         <div className="order-header-label font-medium max-[575px]:mr-1.25">
           Order ID:
         </div>
-        <div>{orderId} j</div>
+        <div>{orderId}</div>
       </div>
     </header>
   );

@@ -4,7 +4,7 @@ export default function HomePage() {
   return (
     <>
       <title>Velocomm</title>
-      <ProductGrid />;
+      <ProductGrid />
     </>
   );
 }
