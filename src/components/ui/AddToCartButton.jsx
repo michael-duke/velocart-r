@@ -10,11 +10,12 @@ export default function AddToCartButton({
   className = "button-primary h-8.5 w-ful p-2",
 }) {
   const [showAdded, setShowAdded] = useState(false);
+  const [spinKey, setSpinKey] = useState(0);
   const timeoutRef = useRef(null);
 
   const handleClick = (e) => {
     e.stopPropagation();
-
+    setSpinKey((prev) => prev + 1);
     // Call the parent's add to cart handler
     if (onAdd) onAdd();
 
@@ -41,8 +42,16 @@ export default function AddToCartButton({
       </div>
 
       {/* Action Button */}
-      <button onClick={handleClick} className={className}>
-        {icon}
+      <button onClick={handleClick} className={cn("gap-2.5", className)}>
+        <span
+          key={spinKey}
+          className={cn(
+            "inline-flex animate-[spin_0.5s_ease-in-out] items-center transition-transform duration-700",
+          )}
+        >
+          {icon}
+        </span>
+
         {text}
       </button>
     </div>

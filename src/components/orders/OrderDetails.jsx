@@ -34,7 +34,7 @@ export default function OrderDetails({ detail, orderId }) {
         <AddToCartButton
           onAdd={() => addToCart(product, 1)}
           text="Buy it again"
-          icon={<RefreshCcw size={20} className="mr-2.5" />}
+          icon={<RefreshCcw size={20} />}
           className="buy-again-button button-primary h-9 w-37.5 text-[15px]"
         />
       </div>
