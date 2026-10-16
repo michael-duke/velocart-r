@@ -1,3 +1,11 @@
+import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { formatDeliveryDate } from "@/utils/date";
 import formatCurrency from "@/utils/money";
 import { getDeliveryOption } from "@/utils/deliveryOption";
@@ -5,10 +13,21 @@ import deliveryOptions from "@/data/deliveryOptions.json";
 import { useCart } from "@/context/CartContext";
 
 export default function CheckoutItem({ item }) {
-  const { removeFromCart, updateDeliveryOption } = useCart();
+  const { removeFromCart, updateDeliveryOption, updateQuantity } = useCart();
+  const [isEditing, setIsEditing] = useState(false);
+  const [newQuantity, setNewQuantity] = useState(item.quantity);
   const deliveryDate = formatDeliveryDate(
     getDeliveryOption(item.deliveryOptionId).deliveryDays,
   );
+
+  const handleEdit = () => {
+    setIsEditing((prev) => !prev);
+
+    if (isEditing) {
+      updateQuantity(item.id, newQuantity);
+    }
+  };
+
   return (
     <div className="mb-3 rounded-sm border border-gray-300 bg-white p-4.5">
       {/* 📅 Delivery Date Header */}
@@ -35,13 +54,39 @@ export default function CheckoutItem({ item }) {
           </div>
 
           <div className="mt-3 flex items-center gap-3 text-sm max-[390px]:flex-col max-[390px]:items-start">
-            <div className="text-gray-700">
-              Quantity:{" "}
-              <span className="font-bold text-black">{item.quantity}</span>
-            </div>
+            {isEditing ? (
+              <div className="mb-4.25">
+                <Select
+                  value={newQuantity.toString()}
+                  onValueChange={(val) => setNewQuantity(Number(val))}
+                  name="quantity"
+                >
+                  <SelectTrigger className="focus-visible:ring-velocart-amber w-14 border-gray-300 bg-gray-50 outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+                    <SelectValue placeholder={item.quantity.toString()} />
+                  </SelectTrigger>
+
+                  <SelectContent className="">
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+                      <SelectItem className="" key={n} value={n.toString()}>
+                        {n}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            ) : (
+              <div className="text-gray-700">
+                Quantity:{" "}
+                <span className="font-bold text-black">{item.quantity}</span>
+              </div>
+            )}
+
             <div className="flex items-center gap-2">
-              <button className="text-velocart-navy cursor-pointer opacity-100 hover:opacity-75">
-                Update
+              <button
+                onClick={handleEdit}
+                className="text-velocart-navy cursor-pointer opacity-100 hover:opacity-75"
+              >
+                {isEditing ? "Save" : "Update"}
               </button>
               <button
                 onClick={() => removeFromCart(item.id)}
