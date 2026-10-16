@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { CartContext } from "./CartContext.js";
+import { useState, useEffect, useMemo } from "react";
+import { CartStateContext } from "./CartContext.js";
+import { CartActionsContext } from "./CartContext.js";
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
@@ -62,20 +63,27 @@ export function CartProvider({ children }) {
   };
 
   const cartQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-
+  
+  const actions = useMemo(
+    () => ({
+      addToCart,
+      removeFromCart,
+      updateDeliveryOption,
+      updateQuantity,
+      clearCart,
+    }),
+    [],
+  );
   return (
-    <CartContext.Provider
+    <CartStateContext.Provider
       value={{
         cart,
         cartQuantity,
-        addToCart,
-        removeFromCart,
-        updateDeliveryOption,
-        updateQuantity,
-        clearCart,
       }}
     >
-      {children}
-    </CartContext.Provider>
+      <CartActionsContext.Provider value={actions}>
+        {children}
+      </CartActionsContext.Provider>
+    </CartStateContext.Provider>
   );
 }

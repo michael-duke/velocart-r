@@ -1,17 +1,26 @@
 import { useNavigate } from "react-router";
 import { formatCurrency, calculateTax } from "@/utils/money";
 import { getDeliveryOption } from "@/utils/deliveryOption";
-import { useCart } from "@/context/CartContext";
+import { useCartActions } from "@/context/cart/CartContext";
 import { calculateDeliveryDateISO } from "@/utils/date";
 
 export default function PaymentSummary({ cartItems }) {
-  const { clearCart } = useCart();
+  const { clearCart } = useCartActions();
   const navigate = useNavigate();
 
-  const totalItemsCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const itemsCostCents = cartItems.reduce((sum, item) => sum + (item.priceCents * item.quantity), 0);
-  const shippingCostCents = cartItems.reduce((sum, item) => sum + getDeliveryOption(item.deliveryOptionId).priceCents, 0);
-  
+  const totalItemsCount = cartItems.reduce(
+    (sum, item) => sum + item.quantity,
+    0,
+  );
+  const itemsCostCents = cartItems.reduce(
+    (sum, item) => sum + item.priceCents * item.quantity,
+    0,
+  );
+  const shippingCostCents = cartItems.reduce(
+    (sum, item) => sum + getDeliveryOption(item.deliveryOptionId).priceCents,
+    0,
+  );
+
   const totalBeforeTaxCents = itemsCostCents + shippingCostCents;
   const taxCents = Math.round(calculateTax(totalBeforeTaxCents));
   const orderTotalCents = totalBeforeTaxCents + taxCents;
@@ -23,7 +32,7 @@ export default function PaymentSummary({ cartItems }) {
       productId: item.id,
       quantity: item.quantity,
       estimatedDeliveryTime: calculateDeliveryDateISO(
-        getDeliveryOption(item.deliveryOptionId).deliveryDays
+        getDeliveryOption(item.deliveryOptionId).deliveryDays,
       ),
       variation: null,
     }));
@@ -49,7 +58,7 @@ export default function PaymentSummary({ cartItems }) {
 
   return (
     <>
-      <h3 className="font-bold text-lg mb-3">Payment Summary</h3>
+      <h3 className="mb-3 text-lg font-bold">Payment Summary</h3>
 
       <div className="space-y-2 text-[15px]">
         <div className="flex justify-between">
@@ -62,23 +71,17 @@ export default function PaymentSummary({ cartItems }) {
         </div>
       </div>
 
-      <div
-        className="border-t border-gray-200 my-2 pt-3 
-        flex justify-between font-bold"
-      >
+      <div className="my-2 flex justify-between border-t border-gray-200 pt-3 font-bold">
         <div>Total before tax:</div>
         <div>{formatCurrency(totalBeforeTaxCents)}</div>
       </div>
 
-      <div className="flex justify-between text-sm mb-3">
+      <div className="mb-3 flex justify-between text-sm">
         <div>Estimated tax (13%):</div>
         <div>{formatCurrency(taxCents)}</div>
       </div>
 
-      <div
-        className="border-t border-gray-200 pt-3 flex justify-between 
-        text-velocart-navy/80 font-bold text-xl mb-5"
-      >
+      <div className="text-velocart-navy/80 mb-5 flex justify-between border-t border-gray-200 pt-3 text-xl font-bold">
         <div>Order total:</div>
         <div>{formatCurrency(orderTotalCents)}</div>
       </div>
@@ -86,8 +89,7 @@ export default function PaymentSummary({ cartItems }) {
       <button
         onClick={handlePlaceOrder}
         disabled={cartItems.length === 0}
-        className="w-full bg-velocart-navy opacity-80 hover:opacity-100 text-white my-5
-        py-3 rounded-[5px] font-medium transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-velocart-navy my-5 w-full cursor-pointer rounded-[5px] py-3 font-medium text-white opacity-80 transition-colors hover:opacity-100 disabled:cursor-not-allowed disabled:opacity-50"
       >
         Place your order
       </button>

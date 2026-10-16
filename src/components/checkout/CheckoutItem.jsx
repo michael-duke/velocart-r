@@ -10,10 +10,10 @@ import { formatDeliveryDate } from "@/utils/date";
 import formatCurrency from "@/utils/money";
 import { getDeliveryOption } from "@/utils/deliveryOption";
 import deliveryOptions from "@/data/deliveryOptions.json";
-import { useCart } from "@/context/CartContext";
+import {useCartActions } from "@/context/cart/CartContext";
 
 export default function CheckoutItem({ item }) {
-  const { removeFromCart, updateDeliveryOption, updateQuantity } = useCart();
+  const { removeFromCart, updateDeliveryOption, updateQuantity } = useCartActions();
   const [isEditing, setIsEditing] = useState(false);
   const [newQuantity, setNewQuantity] = useState(item.quantity);
   const deliveryDate = formatDeliveryDate(

@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { CreditCard } from "lucide-react";
 import logo from "@/assets/logos/velocart-logo.png";
 import mobileLogo from "@/assets/logos/velocart-mobile-logo.png";
-import { useCart } from "@/context/CartContext";
+import { useCart } from "@/context/cart/CartContext";
 
 export default function CheckoutHeader() {
   const { cartQuantity } = useCart();

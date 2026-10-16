@@ -8,11 +8,11 @@ import {
 } from "@/components/ui/select";
 import StarRating from "@/components/ui/StarRating";
 import formatCurrency from "@/utils/money";
-import { useCart } from "@/context/CartContext";
+import { useCartActions } from "@/context/cart/CartContext";
 import AddToCartButton from "../ui/AddToCartButton";
 
 export default function ProductCard({ product }) {
-  const { addToCart } = useCart();
+  const { addToCart } = useCartActions();
   const [quantity, setQuantity] = useState(1);
 
   return (

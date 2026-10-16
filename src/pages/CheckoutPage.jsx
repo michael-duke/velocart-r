@@ -1,5 +1,5 @@
 import CheckoutGrid from "@/components/checkout/CheckoutGrid";
-import { useCart } from "@/context/CartContext";
+import { useCart } from "@/context/cart/CartContext";
 
 export default function CheckoutPage() {
   const { cart } = useCart();

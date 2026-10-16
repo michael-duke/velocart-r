@@ -3,11 +3,11 @@ import products from "@/data/product.json";
 import { RefreshCcw } from "lucide-react";
 import { cx } from "class-variance-authority";
 import { Link } from "react-router";
-import { useCart } from "@/context/CartContext";
+import { useCartActions } from "@/context/cart/CartContext";
 import AddToCartButton from "../ui/AddToCartButton";
 
 export default function OrderDetails({ detail, orderId }) {
-  const { addToCart } = useCart();
+  const { addToCart } = useCartActions();
   // Find the matching product using the product.json data
   const product = products.find((p) => p.id === detail.productId);
 
